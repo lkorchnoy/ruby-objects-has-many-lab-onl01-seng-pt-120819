@@ -1,39 +1,38 @@
-require_relative "../lib/artist.rb"
-
 class Artist
-  
   attr_accessor :name
  
-  @@artist.songs = []
+  @@all = []
   
-  def add_song(song)
-    artist.songs.include(song)
-    song.artist = artist
-  end
-
-
-  def add_song_by_name(name)
-    song.artist = Song.new(name)
-    add_song(song)
-  end
-  
- 
   def initialize(name)
     @name = name
-    save
+    @all << self
   end
  
-  def save
-    @@artist.songs << self
+ def self.all
+   @@all
+ end
+  
+  def add_song(song)
+    song.artist = self
   end
   
-  def some_song.artist_name(name)
-   if self.artist.name = name
-  end
   
+  def add_song_by_name(name)
+    song = Song.new(name)
+    song.artist = self
+  end
+
+  def songs
+    Song.all.select {|song| song.artist == self}
+  end
+
   def self.song_count
-    @@artist.songs
+    Song.all.count
   end
+  
+ 
+  
+  
   
 end
 
